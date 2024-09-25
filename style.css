@@ -1,0 +1,445 @@
+*{
+    font-family: "Noto Sans Thai", sans-serif;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+.text-box {
+    border: 1px solid #dee2e6; /* สีกรอบ */
+    border-radius: 5px; /* มุมโค้งของกรอบ */
+    padding: 10px; /* ช่องว่างภายในกรอบ */
+    background-color: #f8f9fa; /* สีพื้นหลัง */
+    margin-bottom: 15px; /* ช่องว่างด้านล่าง */
+}
+
+body {
+    font-family: "Noto Sans Thai", sans-serif;
+    background-color: #ffffff;
+}
+
+.dropdown-toggle:not(:focus) {
+    outline: 0;
+}
+
+.header-container {
+    width: 100%;
+    background-color: #F2E5D5;
+    padding: 5px;
+    
+}
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    background-color: #F2E5D5;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 2px solid #C7A98B;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+}
+
+.chart img {
+    width: 100%;
+    height: auto;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: #F2E5D5;
+    overflow: hidden; /* ซ่อนเนื้อหาที่เกินขอบ */
+}
+
+.table td, .table th {
+    background-color: #F2E5D5; /* สีพื้นหลังของเซลล์ทั้งหมด */
+    border-color: #7e7e7e;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(242, 229, 213, 0.5); /* สีพื้นหลังของแถวคี่ */
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #ffffff;
+    text-align: left;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #000000;
+    background-color: #C7A98B;
+    color: #000;
+}
+
+.table thead th:first-child {
+    border-top-left-radius: 8px; /* มุมบนซ้าย */
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 8px; /* มุมบนขวา */
+}
+
+.table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 8px; /* มุมล่างซ้าย */
+}
+
+.table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 8px; /* มุมล่างขวา */
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+.table-hover tbody tr:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+/* CSS สำหรับการเรียงลำดับตาราง */
+.sortable {
+    cursor: pointer;
+    text-decoration: none; /* ไม่มีขีดเส้นใต้ */
+    color: #000; /* เปลี่ยนสีตัวอักษรเป็นสีดำ */
+}
+
+.sortable:after {
+    content: "▲";
+    font-size: 0.8em;
+    margin-left: 5px;
+    color: #000; /* ลูกศรสีดำ */
+}
+
+.sortable.desc:after {
+    content: "▼";
+    color: #000; /* ลูกศรสีดำ */
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.img-thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.image-container{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.image-container img {
+    width: 300px;
+    height: 200px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+.search-container input {
+    margin-right: 10px;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+}
+
+.product-info img {
+    margin-right: 10px;
+}
+
+.sub-product-info ul {
+    list-style: none;
+    padding: 10px;
+}
+
+.sub-product-info li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sub-product-info img {
+    margin-right: 10px;
+}
+
+@media (max-width: 1200px) {
+    .card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+    
+    header nav {
+        justify-content: center;
+    }
+
+    .card {
+        width: calc(100% - 20px);
+    }
+}
+
+/* Add Modal CSS */
+.modal-content {
+    border-radius: 10px;
+    background-color: #ece1d4;
+    border: 2px solid #A6896F;
+    color: #000000;
+}
+
+/* Custom button for adding products */
+.custom-btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #C7A98B;
+}
+
+.custom-btn:hover {
+    background-color: #C7A98B;
+    color: #000000;
+    border: 2px solid #C7A98B;
+}
+
+.custom-btn-t {
+    background-color: #C7A98B;
+    color: #000000;
+    border: none;
+}
+
+.custom-btn-t:hover {
+    background-color: #A6896F;
+    color: #000000;
+    border: none;
+}
+
+.custom-btn-s {
+    color: #ff0000;
+    border: none;
+    border: 1px solid #ff0000;
+}
+
+.custom-btn-s:hover {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: 1px solid #ff0000;
+
+}
+
+.pagination {
+    color: #000; /* เปลี่ยนเป็นสีที่คุณต้องการ */
+}
+
+.page-item.active .page-link {
+    background-color: #A6896F; 
+    border-color: #A6896F; 
+    color: #000000; 
+}
+
+.page-item .page-link {
+    color: #000000; /* เปลี่ยนเป็นสีที่คุณต้องการ */
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d; /* สีของปุ่มที่ไม่สามารถกดได้ */
+}
+
+.custom-link {
+    color: #000; /* Set link color to black */
+    text-decoration: none; /* Remove underline */
+}
+
+.custom-link:hover {
+    color: #818181; /* Ensure color remains black on hover */
+    text-decoration: none; /* Ensure underline is not added on hover */
+}
+
+.modal-header,
+.modal-footer {
+    border: none;
+}
+
+body {
+    margin-bottom: 20px;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.a4-container {
+    width: 210mm;
+    min-height: 297mm;
+    margin: auto;
+    background-color: white;
+    padding: 15mm;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.text-md-end {
+    text-align: right;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+@media print {
+
+    .no-print {
+        display: none;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+    .a4-container, .a4-container * {
+        visibility: visible;
+    }
+    .a4-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        min-height: 297mm;
+        margin: auto;
+        padding: 10mm;
+        font-size: 12pt; /* ตั้งขนาดฟอนต์ให้เหมาะสมสำหรับการพิมพ์ */
+    }
+    
+    .a4-container .row.d-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; 
+    }
+
+    .text-end {
+        text-align: right !important; /* จัดข้อความไปทางขวา */
+    }
+
+    .a4-container {
+        page-break-inside: avoid;
+    }
+
+    .section-to-break {
+        page-break-after: always; /* ตัดหน้าหลังจากองค์ประกอบนี้ */
+    }
+    
+    @page {
+        size: A4;
+        margin: 5mm;
+    }
+    
+    @media print {
+        .a4-container {
+            page-break-inside: avoid;
+        }
+    }
+
+    body {
+        background-color: #ffffff !important; /* ใช้สีขาวเป็นพื้นหลังเสมอ */
+    }
+    
+}
+
+.img-account-profile {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.form-signin {
+  max-width: 400px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.list-group-item {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+}
+
+.table-bordered {
+    width: 100%;
+    background-color: #F2E5D5;
+    overflow: hidden;
+    font-size: 11pt;
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #000000; /* ขอบดำสำหรับทุกด้าน */
+    border-right: 1px solid #000000; /* ขอบด้านขวาหนา 1px */
+}
+
+.table-bordered thead th {
+    background-color: #C7A98B; /* สีพื้นหลังหัวตาราง */
+    color: #000000; /* สีข้อความหัวตาราง */
+}
+
+.table-bordered th {
+    padding: 0.75rem; /* ปรับ padding ของหัวตาราง */
+}
+
+.table-bordered td {
+    padding: 0.5rem; /* ปรับ padding ของช่องข้อมูล */
+}
+
+.cancel-stamp {
+    position: absolute; /* ทำให้สามารถวางในตำแหน่งที่ต้องการได้ */
+    top: 60%; /* วางให้อยู่กลางหน้ากระดาษ */
+    left: 50%; /* วางให้อยู่กลางหน้ากระดาษ */
+    transform: translate(-50%, -50%); /* ปรับตำแหน่งให้แน่นอน */
+    padding: 20px;
+    border: 2px dashed red; /* สไตล์ของตราปั๊ม */
+    font-weight: bold;
+    color: red;
+    background-color: rgba(255, 0, 0, 0.1); /* สีพื้นหลังอ่อน */
+    z-index: 10; /* ให้ตราปั๊มอยู่ด้านหน้า */
+    text-align: center; /* จัดกลางข้อความ */
+}
+
+
