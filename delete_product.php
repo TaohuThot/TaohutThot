@@ -30,6 +30,8 @@ if (isset($_GET['product_id'])) {
     }
 
     $stmt->close();
+} else {
+    echo "ไม่มี product_id ที่ระบุ";
 }
 
 $conn->close();
