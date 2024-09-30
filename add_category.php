@@ -61,10 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="post" action="add_category.php">
             <div class="mb-3">
                 <label for="name" class="form-label">ชื่อหมวดหมู่</label>
-                <input type="text" class="form-control" id="category_name" name="category_name" placeholder="ชื่อหมวดหมู่" required>
+                <input type="text" class="form-control" id="category_name" name="category_name"
+                    placeholder="ชื่อหมวดหมู่" autocomplete="off" required>
             </div>
             <button type="submit" class="btn btn-primary custom-btn-t">ยืนยัน</button>
-            <a href="product.php" class="btn btn-outline-secondary custom-btn-s">ยกเลิก</a>
+            <a href="category.php" class="btn btn-outline-secondary custom-btn-s">ยกเลิก</a>
         </form>
     </div>
 </body>

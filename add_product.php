@@ -65,9 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>เพิ่มสินค้า</title>
+    <title>เพิ่มสินค้า</title>
 </head>
+
 <body>
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -92,26 +94,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="mb-3">
                 <label for="category_id" class="form-label">หมวดหมู่</label><br>
                 <select class="form-control" id="category_id" name="category_id" required>
-                    <?php while($row = $result->fetch_assoc()): ?>
+                    <?php while ($row = $result->fetch_assoc()): ?>
                         <option value="<?php echo $row['category_id']; ?>"><?php echo $row['category_name']; ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="product_name" class="form-label">ชื่อสินค้า</label>
-                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="ชื่อสินค้า" required>
+                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="ชื่อสินค้า"
+                    autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">คำอธิบาย</label>
-                <textarea class="form-control" id="description" name="description" rows="3"  placeholder="คำอธิบาย" required></textarea>
+                <textarea class="form-control" id="description" name="description" rows="3" placeholder="คำอธิบาย"
+                    autocomplete="off" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">ราคา</label>
-                <input type="number" class="form-control" id="price" name="price" placeholder="ราคา" required>
+                <input type="number" class="form-control" id="price" name="price" placeholder="ราคา" autocomplete="off"
+                    required>
             </div>
             <button type="submit" class="btn btn-primary custom-btn-t">ยืนยัน</button>
             <a href="product.php" class="btn btn-outline-secondary custom-btn-s">ยกเลิก</a>
         </form>
     </div>
 </body>
+
 </html>

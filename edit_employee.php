@@ -85,40 +85,44 @@ $conn->close();
         <form method="post" action="edit_employee.php?employee_id=<?php echo $employee_id; ?>">
             <div class="mb-3">
                 <label for="name" class="form-label">ชื่อพนักงาน</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo $employees['name']; ?>"
-                    required>
+                <input type="text" class="form-control" id="name" name="name" autocomplete="off"
+                    value="<?php echo $employees['name']; ?>" required>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">ที่อยู่</label>
-                <input type="text" class="form-control" id="address" name="address"
+                <input type="text" class="form-control" id="address" name="address" autocomplete="off"
                     value="<?php echo $employees['address']; ?>" required>
             </div>
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                     <label for="district" class="form-label">ตำบล</label>
-                    <input type="text" class="form-control" id="district" name="district"
+                    <input type="text" class="form-control" id="district" name="district" autocomplete="off"
                         value="<?php echo $employees['district']; ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="city" class="form-label">อำเภอ</label>
-                    <input type="text" class="form-control" id="city" name="city"
+                    <input type="text" class="form-control" id="amphoe" name="city" autocomplete="off"
                         value="<?php echo $employees['city']; ?>" required>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="province" class="form-label">จังหวัด</label>
-                <input type="text" class="form-control" id="province" name="province"
+                <input type="text" class="form-control" id="province" name="province" autocomplete="off"
                     value="<?php echo $employees['province']; ?>" required>
             </div>
             <div class="mb-3">
                 <label for="phone" class="form-label">โทรศัพท์</label>
-                <input type="text" class="form-control" id="phone" name="phone" maxlength="10" pattern="\d{10}"
-                    title="โปรดกรอกหมายเลขโทรศัพท์ที่มี 10 หลัก" value="<?php echo $employees['phone']; ?>" required>
+                <input type="number" class="form-control" id="phone" name="phone" maxlength="10" pattern="\d{10}"
+                    title="โปรดกรอกหมายเลขโทรศัพท์ที่มี 10 หลัก" value="<?php echo $employees['phone']; ?>"
+                    autocomplete="off" required>
             </div>
             <button type="submit" class="btn btn-primary custom-btn-t">บันทึก</button>
             <a href="employee.php" class="btn btn-outline-secondary custom-btn-s">ยกเลิก</a>
         </form>
     </div>
 </body>
+<?php
+include 'inc/script.php';
+?>
 
 </html>

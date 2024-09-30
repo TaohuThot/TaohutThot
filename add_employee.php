@@ -90,7 +90,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="post" action="add_employee.php">
             <div class="mb-3">
                 <label for="name" class="form-label">ชื่อพนักงาน</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อพนักงาน" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="ชื่อพนักงาน"
+                    autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">ที่อยู่</label>
@@ -100,41 +101,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                     <label for="district" class="form-label">ตำบล</label>
-                    <input type="text" class="form-control" id="district" name="district" placeholder="ตำบล" required>
+                    <input type="text" class="form-control" id="district" name="district" placeholder="ตำบล"
+                        autocomplete="off" required>
                 </div>
                 <div class="col-md-6">
                     <label for="city" class="form-label">อำเภอ</label>
-                    <input type="text" class="form-control" id="city" name="city" placeholder="อำเภอ" required>
+                    <input type="text" class="form-control" id="amphoe" name="city" placeholder="อำเภอ"
+                        autocomplete="off" required>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="province" class="form-label">จังหวัด</label>
-                <input type="text" class="form-control" id="province" name="province" placeholder="จังหวัด" required>
+                <input type="text" class="form-control" id="province" name="province" placeholder="จังหวัด"
+                    autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <label for="phone" class="form-label">โทรศัพท์</label>
-                <input type="text" class="form-control" id="phone" name="phone" maxlength="10" pattern="\d{10}"
-                    title="โปรดกรอกหมายเลขโทรศัพท์ที่มี 10 หลัก" placeholder="หมายเลขโทรศัพท์" required>
+                <input type="number" class="form-control" id="phone" name="phone" maxlength="10" pattern="\d{10}"
+                    title="โปรดกรอกหมายเลขโทรศัพท์ที่มี 10 หลัก" placeholder="หมายเลขโทรศัพท์" autocomplete="off"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="username" class="form-label">ชื่อผู้ใช้</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="ชื่อผู้ใช้" required>
+                <input type="text" class="form-control" id="username" name="username" placeholder="ชื่อผู้ใช้"
+                    autocomplete="off" required>
             </div>
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                     <label for="password" class="form-label">รหัสผ่าน</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="รหัสผ่าน"
-                        required>
+                        autocomplete="off" required>
                 </div>
                 <div class="col-md-6">
                     <label for="confirm_password" class="form-label">ยืนยันรหัสผ่าน</label>
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password"
-                        placeholder="ยืนยันรหัสผ่าน" required>
+                        placeholder="ยืนยันรหัสผ่าน" autocomplete="off" required>
                 </div>
             </div>
             <button type="submit" class="btn btn-outline-secondary custom-btn-t mb-4">ยืนยัน</button>
             <a href="employee.php" class="btn btn-outline-secondary custom-btn-s mb-4">ยกเลิก</a>
     </div>
 </body>
-
+<?php
+include 'inc/script.php';
+?>
 </html>

@@ -4,6 +4,7 @@ checkLogin();
 include 'db.php';
 include 'header.php';
 include 'inc/links.php';
+include 'inc/functions.php';
 
 if (isset($_GET['product_id'])) {
     $product_id = intval($_GET['product_id']);
@@ -14,7 +15,7 @@ if (isset($_GET['product_id'])) {
 
     // Get product details for the specific product ID
     $sql_product = "SELECT * FROM products WHERE product_id = $product_id";
-    $result_product = $conn->query($sql_product);
+    $result_product = $conn->query(query: $sql_product);
 
     if ($result_product->num_rows > 0) {
         $product = $result_product->fetch_assoc();
@@ -204,7 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
                                 <label class="form-label" for="price">ราคา</label>
-                                <input class="form-control" id="price" type="number" name="price"
+                                <input class="form-control" id="price" type="number" name="price" autocomplete="off"
                                     value="<?php echo htmlspecialchars(number_format($product['price'], 2, '.', '')); ?>"
                                     required>
                             </div>
@@ -221,7 +222,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
-            <div class="mt-4">
+            <div class="mt-5">
                 <h3>ประวัติการนำเข้าสินค้า</h3>
                 <table class="table table-bordered">
                     <thead>
@@ -234,7 +235,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php while ($stock_in = $result_stock_in->fetch_assoc()): ?>
                             <tr>
                                 <td>
-                                    <?php echo isset($stock_in['stock_in_date']) ? htmlspecialchars($stock_in['stock_in_date']) : 'N/A'; ?>
+                                    <?php
+                                    if (isset($stock_in['stock_in_date'])) {
+                                        $formatted_date = formatThaiDate(strtotime($stock_in['stock_in_date']));
+                                        echo $formatted_date;
+                                    } else {
+                                        echo 'N/A';
+                                    }
+                                    ?>
                                 </td>
                                 <td>
                                     <input type="hidden" name="stock_in_id[]"
@@ -248,25 +256,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </table>
             </div>
         </form>
-    </div>
-
-    <div class="modal fade" id="confirmSaveModal" tabindex="-1" aria-labelledby="confirmSaveModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center">
-                    <h5 class="modal-title" id="confirmSaveModalLabel">คำเตือน!!</h5>
-                </div>
-                <div class="modal-body">
-                    <p class="text-center">ยืนยันที่จะปรับสต๊อกสินค้า(ระบบจะไม่บันทึกรายงาน)</p>
-                </div>
-                <div class="modal-footer gap-5 justify-content-center my-3">
-                    <button type="button" class="btn custom-btn-t px-5" id="confirmSaveBtn">ยืนยัน</button>
-                    <button type="button" class="btn btn-outline-secondary custom-btn-s px-5"
-                        data-bs-dismiss="modal">ยกเลิก</button>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script src="path/to/bootstrap.bundle.js"></script>
@@ -288,16 +277,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        function confirmSave() {
-            var saveModal = new bootstrap.Modal(document.getElementById('confirmSaveModal'));
-            saveModal.show();
+        function checkChanges() {
+            var currentStockQuantity = document.getElementById('quantity').value;
+            if (originalStockQuantity != currentStockQuantity) {
+                confirmSave();
+            } else {
+                document.querySelector('form').submit();
+            }
         }
 
-        // เมื่อผู้ใช้คลิก "ยืนยัน" ใน modal
-        document.getElementById('confirmSaveBtn').addEventListener('click', function () {
-            // ส่งฟอร์ม
-            document.querySelector('form').submit();
-        });
+        function confirmSave() {
+            Swal.fire({
+                title: 'คำเตือน!!',
+                text: 'ยืนยันที่จะแก้ไขจำนวนสินค้า (จะไม่บันทึกในรายงานสินค้านำเข้า)',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#C7A98B',
+                cancelButtonColor: '#cccccc',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // ส่งฟอร์มถ้าผู้ใช้ยืนยัน
+                    document.querySelector('form').submit();
+                }
+            });
+        }
+
     </script>
 </body>
 

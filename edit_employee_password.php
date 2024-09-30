@@ -118,7 +118,7 @@ $conn->close();
         <form method="post" action="edit_employee_password.php?employee_id=<?php echo $employee_id; ?>">
             <div class="mb-3">
                 <label for="new_username">ชื่อผู้ใช้</label>
-                <input type="text" name="new_username" class="form-control" placeholder="ชื่อผู้ใช้">
+                <input type="text" name="new_username" class="form-control" placeholder="ชื่อผู้ใช้" autocomplete="off">
             </div>
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">

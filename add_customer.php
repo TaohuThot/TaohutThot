@@ -65,34 +65,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="post" action="add_customer.php">
             <div class="mb-3">
                 <label for="name" class="form-label">ชื่อลูกค้า</label>
-                <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="ชื่อลูกค้า" required>
+                <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder="ชื่อลูกค้า"
+                    autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">ที่อยู่</label>
-                <textarea class="form-control" id="address" name="address" rows="3" placeholder="ที่อยู่" required></textarea>
+                <textarea class="form-control" id="address" name="address" rows="3" placeholder="ที่อยู่"
+                    autocomplete="off" required></textarea>
             </div>
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                     <label for="district" class="form-label">ตำบล</label>
-                    <input type="text" class="form-control" id="district" name="district" placeholder="ตำบล" required>
+                    <input type="text" class="form-control" id="district" name="district" placeholder="ตำบล"
+                        autocomplete="off" required>
                 </div>
                 <div class="col-md-6">
                     <label for="city" class="form-label">อำเภอ</label>
-                    <input type="text" class="form-control" id="city" name="city" placeholder="อำเภอ" required>
+                    <input type="text" class="form-control" id="amphoe" name="city" placeholder="อำเภอ"
+                        autocomplete="off" required>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="province" class="form-label">จังหวัด</label>
-                <input type="text" class="form-control" id="province" name="province" placeholder="จังหวัด" required>
+                <input type="text" class="form-control" id="province" name="province" placeholder="จังหวัด"
+                    autocomplete="off" required>
             </div>
             <div class="mb-3">
                 <label for="phone" class="form-label">โทรศัพท์</label>
-                <input type="text" class="form-control" id="phonenumber" name="phonenumber" maxlength="10" pattern="\d{10}" title="โปรดกรอกหมายเลขโทรศัพท์ที่มี 10 หลัก"  placeholder="หมายเลขโทรศัพท์" required>
-                </div>
+                <input type="number" class="form-control" id="phonenumber" name="phonenumber" maxlength="10"
+                    pattern="\d{10}" title="โปรดกรอกหมายเลขโทรศัพท์ที่มี 10 หลัก" placeholder="หมายเลขโทรศัพท์"
+                    required>
+            </div>
             <button type="submit" class="btn btn-outline-secondary custom-btn-t">ยืนยัน</button>
             <a href="customer.php" class="btn btn-outline-secondary custom-btn-s">ยกเลิก</a>
         </form>
     </div>
 </body>
+<?php
+include 'inc/script.php';
+?>
 
 </html>

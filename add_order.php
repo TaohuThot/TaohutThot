@@ -200,7 +200,7 @@ while ($row = $product_result->fetch_assoc()) {
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
-                                    <td><input type="number" name="quantity[]" class="form-control quantity" required></td>
+                                    <td><input type="number" name="quantity[]" class="form-control quantity" placeholder="กรอกจำนวน" required></td>
                                     <td><input type="number" name="price[]" class="form-control price" readonly></td>
                                     <td><input type="number" name="total[]" class="form-control total" readonly></td>
                                     <td><button type="button" class="btn btn-danger removeRow">ลบ</button></td>
@@ -357,7 +357,7 @@ while ($row = $product_result->fetch_assoc()) {
                                 <?php endforeach; ?>
                             </select>
                         </td>
-                        <td><input type="number" name="quantity[]" class="form-control quantity" required></td>
+                        <td><input type="number" name="quantity[]" placeholder="กรอกจำนวน" class="form-control quantity" required></td>
                         <td><input type="number" name="price[]" class="form-control price" readonly></td>
                         <td><input type="number" name="total[]" class="form-control total" readonly></td>
                         <td><button type="button" class="btn btn-danger removeRow">ลบ</button></td>

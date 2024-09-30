@@ -142,25 +142,25 @@ $conn->close();
                         <div class="mb-3">
                             <label class="small mb-1" for="inputCompanyName">ชื่อบริษัท</label>
                             <input class="form-control" id="inputCompanyName" type="text" name="company_name"
-                                placeholder="Enter your company name"
+                                placeholder="ชื่อบริษัท"
                                 value="<?php echo htmlspecialchars($company['company_name']); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="inputCompanyAddress" class="form-label">ที่อยู่บริษัท</label>
-                            <textarea class="form-control" id="inputCompanyAddress" name="company_address" rows="3"
+                            <textarea class="form-control" id="inputCompanyAddress" name="company_address" placeholder="ที่อยู่บริษัท" rows="3"
                                 required><?php echo htmlspecialchars($company['company_address']); ?></textarea>
                         </div>
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputCompanyEmail">อีเมล์</label>
                                 <input class="form-control" id="inputCompanyEmail" type="email" name="company_email"
-                                    placeholder="Enter your email address"
+                                    placeholder="อีเมล์"
                                     value="<?php echo htmlspecialchars($company['company_email']); ?>">
                             </div>
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputCompanyPhone">โทรศัพท์</label>
-                                <input class="form-control" id="inputCompanyPhone" type="tel" name="company_phone"
-                                    placeholder="Enter your phone number"
+                                <input class="form-control" id="inputCompanyPhone" type="number" name="company_phone"
+                                    placeholder="โทรศัพท์"
                                     value="<?php echo htmlspecialchars($company['company_phone']); ?>">
                             </div>
                         </div>

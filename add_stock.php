@@ -95,12 +95,12 @@ $conn->close();
                     <td>
                         <select class="form-control product-select" name="product_id[]" required>
                             <?php foreach ($products as $product): ?>
-                                                <option value="<?= $product['product_id'] ?>" data-price="<?= $product['price'] ?>"><?= $product['product_name'] ?></option>
+                                                        <option value="<?= $product['product_id'] ?>" data-price="<?= $product['price'] ?>"><?= $product['product_name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </td>
-                    <td><input type="number" name="quantity[]" class="form-control quantity" required></td>
-                    <td><input type="number" name="cost[]" class="form-control cost" step="0.01" placeholder="กรอกราคาต้นทุน" required></td>
+                    <td><input type="number" name="quantity[]" class="form-control quantity" placeholder="กรอกจำนวน" autocomplete="off" required></td>
+                    <td><input type="number" name="cost[]" class="form-control cost" placeholder="กรอกราคาต้นทุน" autocomplete="off" required></td>
                     <td><button type="button" class="btn btn-danger removeRow">ลบ</button></td>
                 </tr>`;
                 $('#productTable tbody').append(newRow);
@@ -172,9 +172,10 @@ $conn->close();
                                 <?php endforeach; ?>
                             </select>
                         </td>
-                        <td><input type="number" name="quantity[]" class="form-control quantity" required></td>
-                        <td><input type="number" name="cost[]" class="form-control cost" step="0.01"
-                                placeholder="กรอกราคาต้นทุน" required></td>
+                        <td><input type="number" name="quantity[]" class="form-control quantity" placeholder="กรอกจำนวน"
+                                autocomplete="off" required></td>
+                        <td><input type="number" name="cost[]" class="form-control cost" placeholder="กรอกราคาต้นทุน"
+                                autocomplete="off" required></td>
                         <td><button type="button" class="btn btn-danger removeRow">ลบ</button></td>
                     </tr>
                 </tbody>
