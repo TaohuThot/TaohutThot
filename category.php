@@ -5,14 +5,34 @@ include 'db.php';
 include 'header.php';
 include 'inc/links.php';
 
-// Search functionality
-$search = isset($_GET['search']) ? $_GET['search'] : '';
+$search = isset($_GET['search']) ? $_GET['search'] : ''; // รับค่า search
+$records_per_page = 10; // จำนวนข้อมูลที่จะแสดงต่อหน้า
+$current_page = isset($_GET['page']) ? intval($_GET['page']) : 1; // หน้าปัจจุบัน
+$offset = ($current_page - 1) * $records_per_page; // คำนวณตำแหน่งเริ่มต้นของข้อมูลในหน้านั้น
+
+// เตรียมคำสั่ง SQL สำหรับดึงข้อมูลหมวดหมู่พร้อมนับจำนวนสินค้าในแต่ละหมวดหมู่
 $sql = "SELECT c.*, COUNT(p.product_id) AS product_count 
         FROM categories c 
         LEFT JOIN products p ON c.category_id = p.category_id 
-        WHERE c.category_name LIKE '%" . $conn->real_escape_string($search) . "%' 
-        GROUP BY c.category_id";
-$result = $conn->query($sql);
+        WHERE c.category_name LIKE ? 
+        GROUP BY c.category_id 
+        LIMIT ?, ?";
+
+// เตรียมคำสั่งสำหรับการดึงข้อมูล
+$stmt = $conn->prepare($sql);
+$search_param = "%$search%";
+$stmt->bind_param("sii", $search_param, $offset, $records_per_page);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// คำสั่ง SQL สำหรับนับจำนวนหมวดหมู่ทั้งหมด
+$count_sql = "SELECT COUNT(*) as total_records FROM categories WHERE category_name LIKE ?";
+$count_stmt = $conn->prepare($count_sql);
+$count_stmt->bind_param("s", $search_param);
+$count_stmt->execute();
+$count_result = $count_stmt->get_result();
+$total_records = $count_result->fetch_assoc()['total_records'];
+$total_pages = ceil($total_records / $records_per_page); // คำนวณจำนวนหน้าทั้งหมด
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +78,6 @@ $result = $conn->query($sql);
                         <?php if ($_SESSION['role'] === 'admin'): ?>
                             <th class='text-center'>รายละเอียด</th>
                         <?php endif; ?>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -84,10 +103,49 @@ $result = $conn->query($sql);
                     } else {
                         echo "<tr><td colspan='4' class='text-center'>ไม่มีข้อมูลหมวดหมู่</td></tr>";
                     }
-                    $conn->close();
                     ?>
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <div class="mt-2 me-3">
+                        <?php
+                        $start_number = ($current_page - 1) * $records_per_page + 1;
+                        $end_number = min($start_number + $records_per_page - 1, $total_records);
+                        echo "จำนวนหมวดหมู่ $start_number - $end_number จากทั้งหมด $total_records รายการ";
+                        ?>
+                    </div>
+                    <?php if ($current_page > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?page=<?php echo $current_page - 1; ?>&search=<?php echo urlencode($search); ?>">ก่อนหน้า</a>
+                        </li>
+                    <?php else: ?>
+                        <li class="page-item disabled">
+                            <a class="page-link">ก่อนหน้า</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                        <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>">
+                            <a class="page-link" href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>">
+                                <?php echo $i; ?>
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <?php if ($current_page < $total_pages): ?>
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?page=<?php echo $current_page + 1; ?>&search=<?php echo urlencode($search); ?>">ถัดไป</a>
+                        </li>
+                    <?php else: ?>
+                        <li class="page-item disabled">
+                            <a class="page-link">ถัดไป</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
         </div>
     </div>
 
@@ -126,7 +184,7 @@ $result = $conn->query($sql);
                                     text: data,
                                     showConfirmButton: true,
                                     confirmButtonText: 'ยืนยัน',
-                                    confirmButtonColor: '#C7A98B'
+                                    confirmButtonColor: '#C7A98B',
                                 });
                             }
                         });
@@ -134,7 +192,6 @@ $result = $conn->query($sql);
             });
         }
     </script>
-
 </body>
 
 </html>

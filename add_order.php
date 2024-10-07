@@ -16,11 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $total_tax = 0;
     $grand_total = 0;
 
+    // ตรวจสอบสต็อกสินค้า
     $product_ids = $_POST['product_id'];
     $quantities = $_POST['quantity'];
     $prices = $_POST['price'];
-
-    // ตรวจสอบสต็อกสินค้า
     $stock_check_passed = true;
     $insufficient_stock_products = [];
 
@@ -33,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // คำนวณยอดรวมก่อนหักส่วนลด
         $total_before_discount += $total;
 
-        // ตรวจสอบสต็อกก่อนการหักจำนวน
+        // ดึงข้อมูลจำนวนสินค้าคงเหลือในคลัง        
         $sql_check_stock = "SELECT quantity FROM products WHERE product_id = ?";
         $stmt_check_stock = $conn->prepare($sql_check_stock);
         $stmt_check_stock->bind_param("i", $product_id);
@@ -42,14 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_check_stock->fetch();
         $stmt_check_stock->close();
 
+        // ตรวจสอบว่าจำนวนที่ต้องการมากกว่าจำนวนในสต็อกหรือไม่
         if ($quantity > $current_stock) {
             $stock_check_passed = false;
             $insufficient_stock_products[] = $product_id;
         }
     }
 
+    //หากสต็อกเพียงพอ ให้บันทึกข้อมูลคำสั่งซื้อ
     if ($stock_check_passed) {
-        // บันทึกข้อมูลลงในตาราง orders โดยไม่ระบุ order_date
+        // บันทึกข้อมูลลงในตาราง orders
         $sql_order = "INSERT INTO orders (customer_id, company_id, discount, tax_rate, total_price) VALUES (?, ?, ?, ?, ?)";
         $stmt_order = $conn->prepare($sql_order);
         $stmt_order->bind_param("iiddd", $customer_id, $company_id, $discount, $tax_rate, $grand_total);
@@ -103,30 +104,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// ดึงข้อมูลบริษัท
 $company_query = "SELECT company_id, company_name, company_address, company_phone, company_email FROM companies";
 $company_result = $conn->query($company_query);
-
 // เก็บข้อมูลใน array
 $companies = [];
 while ($row = $company_result->fetch_assoc()) {
     $companies[] = $row;
 }
 
-// Query to fetch customers
+// ดึงข้อมูลลูกค้า
 $customer_query = "SELECT customer_id, customer_name, address, district, city, province, phonenumber FROM customers";
 $customer_result = $conn->query($customer_query);
+// เก็บข้อมูลใน array
 $customers = [];
 while ($row = $customer_result->fetch_assoc()) {
     $customers[] = $row;
 }
 
-// Query to fetch products with stock
+// ดึงข้อมูลสินค้า
 $product_query = "SELECT product_id, product_name, price, quantity FROM products";
 $product_result = $conn->query($product_query);
+// เก็บข้อมูลใน array
 $products = [];
 while ($row = $product_result->fetch_assoc()) {
     $products[] = $row;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="th">
@@ -134,6 +138,7 @@ while ($row = $product_result->fetch_assoc()) {
 <head>
     <title>เพิ่มคำสั่งซื้อ</title>
     <script>
+        //แปลงข้อมูลให้อยู่ในรูปแบบjson
         $(document).ready(function () {
             let companies = <?= json_encode($companies) ?>;
             let customers = <?= json_encode($customers) ?>;
@@ -141,6 +146,7 @@ while ($row = $product_result->fetch_assoc()) {
 
             const TAX_RATE = 7;  // อัตราภาษี 7%
 
+            //ฟังชั่นการอัปเดตที่อยู่บริษัท
             function updateCompanyAddress() {
                 let companyId = $('#company_name').val();
                 let company = companies.find(c => c.company_id == companyId);
@@ -152,6 +158,7 @@ while ($row = $product_result->fetch_assoc()) {
                 }
             }
 
+            //ฟังชั่นการอัปเดตที่อยู่ลูกค้า
             function updateCustomerAddress() {
                 let customerId = $('#customer_name').val();
                 let customer = customers.find(c => c.customer_id == customerId);
@@ -163,6 +170,7 @@ while ($row = $product_result->fetch_assoc()) {
                 }
             }
 
+            //ฟังชั่นการคำนวณยอดรวม
             function calculateTotal() {
                 let subtotal = 0;
 
@@ -176,10 +184,12 @@ while ($row = $product_result->fetch_assoc()) {
                     subtotal += total;
                 });
 
+                //ถ้ามีส่วนลด ระบบจะหักส่วนลดตามเปอร์เซ็นต์จากยอดรวม.
                 let discount = $('#toggleDiscount').is(':checked') ? (parseFloat($('#discount').val()) || 0) : 0;
                 let discountAmount = (subtotal * discount) / 100;
                 let totalAfterDiscount = subtotal - discountAmount;
 
+                //ถ้ามีการคิดภาษี ระบบจะคำนวณภาษีจากยอดรวมหลังหักส่วนลด
                 let tax = $('#toggleTax').is(':checked') ? (totalAfterDiscount * TAX_RATE) / 100 : 0;
                 let grandTotal = totalAfterDiscount + tax;
 
@@ -194,9 +204,9 @@ while ($row = $product_result->fetch_assoc()) {
                                     <td>
                                         <select class="form-control product-select" name="product_id[]" required>
                                             <?php foreach ($products as $product): ?>
-                                                    <option value="<?= $product['product_id'] ?>" data-price="<?= $product['price'] ?>" data-quantity="<?= $product['quantity'] ?>">
-                                                        <?= $product['product_name'] ?> (คงเหลือ: <?= $product['quantity'] ?>)
-                                                    </option>
+                                                                        <option value="<?= $product['product_id'] ?>" data-price="<?= $product['price'] ?>" data-quantity="<?= $product['quantity'] ?>">
+                                                                            <?= $product['product_name'] ?> (คงเหลือ: <?= $product['quantity'] ?>)
+                                                                        </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
@@ -266,11 +276,12 @@ while ($row = $product_result->fetch_assoc()) {
                 calculateTotal();
             });
 
-            // Call update functions when selections change
+            // เรียกฟังก์ชันเมื่อเปลี่ยนบริษัท
             $('#company_name').change(function () {
                 updateCompanyAddress();
             });
 
+            // เรียกฟังก์ชันเมื่อเปลี่ยนลูกค้า
             $('#customer_name').change(function () {
                 updateCustomerAddress();
             });
@@ -337,7 +348,7 @@ while ($row = $product_result->fetch_assoc()) {
             <table class="table" id="productTable">
                 <thead>
                     <tr>
-                        <th class = 'text-center'>ลำดับที่</th>
+                        <th class='text-center'>ลำดับที่</th>
                         <th>รายการ</th>
                         <th>จำนวน</th>
                         <th>ราคาต่อหน่วย</th>
@@ -347,7 +358,7 @@ while ($row = $product_result->fetch_assoc()) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td class = 'text-center'>1</td>
+                        <td class='text-center'>1</td>
                         <td>
                             <select class="form-control product-select" name="product_id[]" required>
                                 <?php foreach ($products as $product): ?>
@@ -357,7 +368,8 @@ while ($row = $product_result->fetch_assoc()) {
                                 <?php endforeach; ?>
                             </select>
                         </td>
-                        <td><input type="number" name="quantity[]" placeholder="กรอกจำนวน" class="form-control quantity" required></td>
+                        <td><input type="number" name="quantity[]" placeholder="กรอกจำนวน" class="form-control quantity"
+                                required></td>
                         <td><input type="number" name="price[]" class="form-control price" readonly></td>
                         <td><input type="number" name="total[]" class="form-control total" readonly></td>
                         <td><button type="button" class="btn btn-danger removeRow">ลบ</button></td>
@@ -370,7 +382,7 @@ while ($row = $product_result->fetch_assoc()) {
                             <label for="toggleDiscount" class="me-2"> ส่วนลด:</label>
                         </td>
                         <td colspan="2">
-                            <input type="number" class="form-control" id="discount" name="discount" value="0" disabled>
+                            <input type="number" class="form-control" id="discount" name="discount"  placeholder="กรอกส่วนลด %" disabled>
                         </td>
                     </tr>
                     <tr>
@@ -393,7 +405,7 @@ while ($row = $product_result->fetch_assoc()) {
                 <button type="submit" class="btn btn-primary custom-btn-t mb-5">เพิ่มคำสั่งซื้อ</button>
             </div>
         </form>
-        
+
     </div>
 </body>
 

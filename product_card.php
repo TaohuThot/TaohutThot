@@ -73,7 +73,7 @@ $total_pages = ceil($total_records / $records_per_page);
             <h2>สินค้า</h2>
             <div class="me-4"></div>
             <a href="product.php" class="btn btn-outline-secondary custom-btn me-2">
-                <i class="bi-table "></i>
+                <i class="bi-table" style="color: #A6896F;"></i>
             </a>
             <div class="d-flex flex-grow-1 justify-content-end align-items-center gap-2">
                 <div>

@@ -80,7 +80,7 @@ $conn->close();
                                 <th>ลำดับที่</th>
                                 <th>สินค้า</th>
                                 <th>จำนวน</th>
-                                <th>ราคาต้นทุน</th> <!-- เพิ่มคอลัมน์ราคาต้นทุน -->
+                                <th>ราคาต้นทุน</th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -91,7 +91,7 @@ $conn->close();
                                         <td><?php echo $index++; ?></td>
                                         <td><?php echo htmlspecialchars($item["product_name"]); ?></td>
                                         <td><?php echo htmlspecialchars($item["quantity"]); ?></td>
-                                        <td><?php echo htmlspecialchars(number_format($item["cost_per_unit"], 2)); ?></td> <!-- แสดงราคาต้นทุน -->
+                                        <td><?php echo htmlspecialchars(number_format($item["cost_per_unit"], 2)); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>

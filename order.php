@@ -7,7 +7,7 @@ include 'inc/links.php';
 include 'inc/functions.php';
 
 $search = isset($_GET['search']) ? $_GET['search'] : '';
-$records_per_page = 12;
+$records_per_page = 10;
 $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $offset = ($current_page - 1) * $records_per_page;
 

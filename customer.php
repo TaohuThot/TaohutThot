@@ -175,42 +175,42 @@ $conn->close();
         </div>
     </div>
     <script>
-    function confirmDelete(customer_id) {
-        Swal.fire({
-            title: 'ยืนยันการลบลูกค้า',
-            text: 'คุณแน่ใจว่าต้องการลบลูกค้าท่านนี้?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'ยืนยัน',
-            cancelButtonText: 'ยกเลิก',
-            confirmButtonColor: '#C7A98B',
-            cancelButtonColor: '#cccccc'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch('delete_customer.php?customer_id=' + customer_id)
-                    .then(response => response.text())
-                    .then(data => {
-                        if (data === "ลบสำเร็จ") {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'ลบลูกค้าเรียบร้อยแล้ว',
-                                confirmButtonColor: '#C7A98B'
-                            }).then(() => {
-                                window.location.reload();
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'ไม่สามารถลบลูกค้าได้',
-                                text: data,
-                                confirmButtonColor: '#C7A98B'
-                            });
-                        }
-                    });
-            }
-        });
-    }
-</script>
+        function confirmDelete(customer_id) {
+            Swal.fire({
+                title: 'ยืนยันการลบลูกค้า',
+                text: 'คุณแน่ใจว่าต้องการลบลูกค้าท่านนี้?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#C7A98B',
+                cancelButtonColor: '#cccccc'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch('delete_customer.php?customer_id=' + customer_id)
+                        .then(response => response.text())
+                        .then(data => {
+                            if (data === "ลบสำเร็จ") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'ลบลูกค้าเรียบร้อยแล้ว',
+                                    confirmButtonColor: '#C7A98B'
+                                }).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'ไม่สามารถลบลูกค้าได้',
+                                    text: data,
+                                    confirmButtonColor: '#C7A98B'
+                                });
+                            }
+                        });
+                }
+            });
+        }
+    </script>
 
 </body>
 

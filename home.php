@@ -44,7 +44,7 @@ if ($result_employee_name && $result_employee_name->num_rows > 0) {
     $employee_name = "พนักงานไม่ทราบชื่อ";
 }
 
-// ดึงข้อมูลสินค้าขายดี 10 อันดับ
+// ดึงข้อมูลสินค้าขายดี 10 อันดับ จาก quantity
 $sql_best_selling_products = "
     SELECT products.product_name, SUM(order_items.quantity) AS total_quantity
     FROM order_items
@@ -130,6 +130,7 @@ $sql_monthly_sales = "
     GROUP BY DATE_FORMAT(o.order_date, '%Y-%m')";
 $result_monthly_sales = $conn->query($sql_monthly_sales);
 
+//อัปเดตยอดขายรายเดือน
 if ($result_monthly_sales->num_rows > 0) {
     while ($row = $result_monthly_sales->fetch_assoc()) {
         $month_index = array_search($row['order_month'], $months);
@@ -296,18 +297,17 @@ $conn->close(); // ปิดการเชื่อมต่อฐานข้�
                                 </div>
                                 <div class="col-3">
                                     <button id="showListGroup" class="btn btn-outline-secondary custom-btn me-2">
-                                        <i class="bi-list"></i>
+                                        <i class="bi-list" style="color: #A6896F;"></i>
                                     </button>
 
                                     <button id="showChart" class="btn btn-outline-secondary custom-btn">
-                                        <i class="bi-pie-chart"></i>
+                                        <i class="bi-pie-chart" style="color: #A6896F;"></i>
                                     </button>
                                 </div>
                             </div>
-
                             <!-- รายการสินค้าขายดี -->
                             <div id="bestSellingList">
-                                <?php if (count($best_selling_data) > 0): ?>
+                                <?php if (count(value: $best_selling_data) > 0): ?>
                                     <ul class="list-group list-group-flush">
                                         <?php foreach ($best_selling_data as $product): ?>
                                             <li class="list-group-item d-flex justify-content-between">
@@ -383,7 +383,7 @@ $conn->close(); // ปิดการเชื่อมต่อฐานข้�
                                                 },
                                                 color: '#000', // สีของข้อความ
                                                 font: {
-                                                    weight: 'bold',
+                                                    weight: 'normal',
                                                     size: 14
                                                 }
                                             }

@@ -88,7 +88,7 @@ $total_pages = ceil($total_records / $records_per_page);
             <h2>สินค้า</h2>
             <div class="me-4"></div>
             <a href="product_card.php" class="btn btn-outline-secondary custom-btn me-2">
-                <i class="bi bi-image"></i>
+                <i class="bi bi-image" style="color: #A6896F;"></i>
             </a>
             <div class="checkbox">
                 <input type="checkbox" id="cbx" style="display:none">
