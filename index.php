@@ -62,8 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="form-signin w-100 m-auto text-center">
         <form method="post" action="index.php">
-            <img class="mb-3 me-4" src="image/cat-ชานมไข่มุก.gif" alt="Cat Drinking Milk Tea GIF" width="200"
-                height="150">
+            <!-- <img class="mb-3 me-4" src="image/cat-ชานมไข่มุก.gif" alt="Cat Drinking Milk Tea GIF" width="200"
+                height="150"> -->
 
             <h1 class="h3 mb-3 text-center">Login</h1>
             <div class="form-floating">

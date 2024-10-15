@@ -109,7 +109,7 @@ $total_pages = ceil($total_records / $records_per_page);
             </div>
         </div>
         <div class="table-responsive ">
-            <table class="table table-striped shadow border-0">
+            <table class="table table-striped shadow border-0 text-truncate">
                 <thead>
                     <tr>
                         <th>สินค้า</th>
@@ -122,7 +122,7 @@ $total_pages = ceil($total_records / $records_per_page);
                         <th>
                             <a href="?search=<?php echo urlencode($search); ?>&sort=price&order=<?php echo ($sort === 'price' && $order === 'ASC') ? 'DESC' : 'ASC'; ?>"
                                 class="sortable <?php echo ($sort === 'price' ? ($order === 'ASC' ? '' : 'desc') : ''); ?>">
-                                ราคา
+                                ราคาขาย
                             </a>
                         </th>
                         <th>ต้นทุนเฉลี่ย</th>

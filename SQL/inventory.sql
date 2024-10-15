@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2024 at 12:46 PM
+-- Generation Time: Oct 15, 2024 at 05:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `category_id` int(11) NOT NULL,
-  `category_name` varchar(255) NOT NULL,
+  `category_name` varchar(40) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -58,8 +58,8 @@ INSERT INTO `categories` (`category_id`, `category_name`, `created_at`) VALUES
 
 CREATE TABLE `companies` (
   `company_id` int(11) NOT NULL,
-  `company_name` varchar(255) NOT NULL,
-  `company_address` varchar(255) DEFAULT NULL,
+  `company_name` varchar(40) NOT NULL,
+  `company_address` varchar(40) DEFAULT NULL,
   `company_phone` varchar(10) DEFAULT NULL,
   `company_email` varchar(100) DEFAULT NULL,
   `profile_image` varchar(255) DEFAULT NULL
@@ -70,7 +70,7 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`company_id`, `company_name`, `company_address`, `company_phone`, `company_email`, `profile_image`) VALUES
-(1, 'บริษัท เฮง เฮง จำกัด', '111/74 ม.3 ต.พิมลราช อ.บางบัวทอง จ.นนทบุรี 11110', '0955514657', 'third.nk20@gmail.com', 'ed095430-d7fe-11ed-b2bb-d336b48a2b9a_webp_original.jpg');
+(1, 'บริษัท เอ็ม เค อิเล็กทรอนิกส์ จำกัด', '111/74 ม.3 ต.พิมลราช อ.บางบัวทอง จ.นนทบุ', '0955514657', 'third.nk20@gmail.com', 'ed095430-d7fe-11ed-b2bb-d336b48a2b9a_webp_original.jpg');
 
 -- --------------------------------------------------------
 
@@ -80,11 +80,11 @@ INSERT INTO `companies` (`company_id`, `company_name`, `company_address`, `compa
 
 CREATE TABLE `customers` (
   `customer_id` int(11) NOT NULL,
-  `customer_name` varchar(255) NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `district` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `province` varchar(255) DEFAULT NULL,
+  `customer_name` varchar(40) NOT NULL,
+  `address` varchar(40) DEFAULT NULL,
+  `district` varchar(40) DEFAULT NULL,
+  `city` varchar(40) DEFAULT NULL,
+  `province` varchar(40) DEFAULT NULL,
   `phonenumber` varchar(10) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -117,8 +117,8 @@ INSERT INTO `customers` (`customer_id`, `customer_name`, `address`, `district`, 
 
 CREATE TABLE `employees` (
   `employee_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
+  `name` varchar(40) NOT NULL,
+  `address` varchar(40) DEFAULT NULL,
   `district` varchar(100) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `province` varchar(100) DEFAULT NULL,
@@ -477,7 +477,7 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`
 
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
+  `product_name` varchar(30) NOT NULL,
   `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -501,13 +501,13 @@ INSERT INTO `products` (`product_id`, `product_name`, `description`, `price`, `q
 (8, 'รีโมทv.3', '-', 70.00, 30, 2, '2024-08-08 13:38:52', 'รีโมท LED รวมรุ่น.jpg'),
 (16, 'หม้อข้าวขนาดเล็ก', '-', 310.00, 119, 3, '2024-08-09 16:45:21', '567314.jpg'),
 (17, 'สายแลน 15 เมตร', '-', 450.00, 47, 5, '2024-08-12 14:56:51', '515997.jpg'),
-(19, 'AX-4BT', 'เครื่องปรับแต่งเสียงง\r\n\r\n\r\n\r\n\r\n', 3500.00, 20, 7, '2024-08-29 15:38:28', '179906.jpg'),
+(19, 'AX-4BT', 'เครื่องปรับแต่งเสียงง\r\n\r\n\r\n\r\n\r\n', 3500.00, 30, 7, '2024-08-29 15:38:28', '179906.jpg'),
 (20, 'ลำโพงไฟเบอร์12\"', 'ลำโพงขยายเสียง', 2900.00, 20, 8, '2024-08-29 15:46:36', 'LINE_ALBUM_ตู้ลำโพงบ้าน_๒๔๐๒๑๑_1.jpg'),
 (21, 'ไมค์ลอยถือคู่', 'ใช้ในการขยายเสียง', 350.00, 51, 10, '2024-08-29 15:50:51', 'LINE_ALBUM_ไมค์ลอย แบบถือ_๒๔๐๒๑๑_17.jpg'),
 (22, 'ลำโพงคางหมู10\"', 'ลำโพง', 2100.00, 21, 8, '2024-09-11 11:59:14', '32.jpg'),
-(23, 'ตู้ลำโพง8\"', 'ลำโพงอเนกประสงค์พร้อมไมค์\r\n', 950.00, 21, 8, '2024-09-11 12:11:53', '1.jpg'),
+(23, 'ตู้ลำโพง8\"', 'ลำโพงอเนกประสงค์พร้อมไมค์\r\n', 950.00, 20, 8, '2024-09-11 12:11:53', '1.jpg'),
 (25, 'ตู็แล็ค', '-', 1500.00, 15, 8, '2024-09-21 13:11:45', 'LINE_ALBUM_ขาตั้งลำโพง+ขาแขวนTV+ตู้ Rack_240802_3.jpg'),
-(26, 'ตู้ลำโพงอเนกประสงค์', '--', 200.00, 5, 8, '2024-09-21 13:14:07', '19.jpg'),
+(26, 'ตู้ลำโพงอเนกประสงค์', '--', 200.00, 0, 8, '2024-09-21 13:14:07', '19.jpg'),
 (27, 'เสาอากาศ', '-', 170.00, 5, 14, '2024-09-21 13:22:46', '656415.jpg'),
 (28, 'เครื่องช่างดิจิตอล', '-', 200.00, 77, 15, '2024-09-21 13:26:23', '4D5D7E37-B1AE-4EA5-9F51-0BAD0FDA238E.jpg'),
 (29, 'วิทยุ', '-', 350.00, 11, 14, '2024-09-21 13:41:11', '590951.jpg'),
@@ -571,7 +571,8 @@ INSERT INTO `product_costs` (`cost_id`, `product_id`, `stock_in_id`, `cost_per_u
 (35, 17, 67, 150.00, 25),
 (36, 42, 68, 35.00, 50),
 (37, 28, 69, 150.00, 10),
-(38, 1, 70, 100.00, 10);
+(38, 1, 70, 100.00, 10),
+(39, 19, 71, 2000.00, 10);
 
 -- --------------------------------------------------------
 
@@ -655,7 +656,8 @@ INSERT INTO `stock_in` (`stock_in_id`, `date`) VALUES
 (67, '2024-09-28 16:28:00'),
 (68, '2024-09-28 16:32:18'),
 (69, '2024-09-29 09:52:50'),
-(70, '2024-09-29 11:37:49');
+(70, '2024-09-29 11:37:49'),
+(71, '2024-10-07 14:56:08');
 
 -- --------------------------------------------------------
 
@@ -724,7 +726,8 @@ INSERT INTO `stock_in_items` (`item_id`, `stock_in_id`, `product_id`, `quantity`
 (49, 67, 17, 25),
 (50, 68, 42, 50),
 (51, 69, 28, 10),
-(52, 70, 1, 10);
+(52, 70, 1, 10),
+(53, 71, 19, 10);
 
 -- --------------------------------------------------------
 
@@ -735,7 +738,7 @@ INSERT INTO `stock_in_items` (`item_id`, `stock_in_id`, `product_id`, `quantity`
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(40) NOT NULL,
   `role` enum('admin','user') NOT NULL,
   `employee_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -745,8 +748,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `employee_id`) VALUES
-(1, 'Admin', '$2y$10$p4BnCAVkLJG9tDUuE8z1b.bS73hcsTA3Tq5mbiRJRQyBkJk3uvB52', 'admin', NULL),
-(6, 'User', '$2y$10$3gGLt19F8Z0G9nRUvbPwsuC/E1Vrzsp7wdCYEOJJ26ztbpY8zC0Ny', 'user', 9);
+(1, 'Admin', '$2y$10$p4BnCAVkLJG9tDUuE8z1b.bS73hcsTA3T', 'admin', NULL),
+(6, 'User', '$2y$10$pSDvIpEg5WTeogEYO61u5OBdTRnyc/FPJ', 'user', 9);
 
 --
 -- Indexes for dumped tables
@@ -889,19 +892,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_costs`
 --
 ALTER TABLE `product_costs`
-  MODIFY `cost_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `cost_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `stock_in`
 --
 ALTER TABLE `stock_in`
-  MODIFY `stock_in_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `stock_in_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `stock_in_items`
 --
 ALTER TABLE `stock_in_items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `users`

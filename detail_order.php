@@ -91,7 +91,7 @@ $conn->close();
         <div class="a4-container">
             <div class="row mb-2">
                 <div class="col-12 text-center">
-                    <h2>ใบส่งสินค้าชั่วคราว</h2>
+                    <h2>ใบเสร็จรับเงิน</h2>
                 </div>
             </div>
             <div class="row mb-1">
@@ -104,7 +104,8 @@ $conn->close();
                             ที่อยู่:
                             <?php echo isset($company['company_address']) ? $company['company_address'] : 'ไม่พบข้อมูล'; ?><br>
                             เบอร์โทร:
-                            <?php echo isset($company['company_phone']) ? $company['company_phone'] : 'ไม่พบข้อมูล'; ?>
+                            <?php echo isset($company['company_phone']) ? $company['company_phone'] : 'ไม่พบข้อมูล'; ?><br>
+                            เลขประจำตัวผู้เสียภาษี: 1234567891234
                         </div>
                         <div class="col-4 text-end">
                             <h5>เลขที่ใบสั่งซื้อ: <?php echo $order_id; ?></h5>

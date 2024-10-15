@@ -303,6 +303,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             });
         }
+        function checkChanges() {
+            var currentStockQuantity = document.getElementById('quantity').value;
+
+            // ตรวจสอบว่าค่าของสินค้าคงเหลือไม่ติดลบ
+            if (currentStockQuantity < 0) {
+                Swal.fire({
+                    title: 'ข้อผิดพลาด!',
+                    text: 'จำนวนสินค้าคงเหลือไม่สามารถติดลบได้!',
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                    confirmButtonColor: '#C7A98B',
+                });
+                return; // หยุดการดำเนินการหากจำนวนติดลบ
+            }
+
+            // ตรวจสอบว่ามีการเปลี่ยนแปลงในสินค้าคงเหลือหรือไม่
+            if (originalStockQuantity != currentStockQuantity) {
+                confirmSave();
+            } else {
+                document.querySelector('form').submit();
+            }
+        }
 
     </script>
 </body>
