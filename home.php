@@ -307,11 +307,14 @@ $conn->close(); // ปิดการเชื่อมต่อฐานข้�
                             </div>
                             <!-- รายการสินค้าขายดี -->
                             <div id="bestSellingList">
-                                <?php if (count(value: $best_selling_data) > 0): ?>
+                                <?php if (count($best_selling_data) > 0): ?>
                                     <ul class="list-group list-group-flush">
                                         <?php foreach ($best_selling_data as $product): ?>
                                             <li class="list-group-item d-flex justify-content-between">
-                                                <span><?php echo $product['product_name']; ?></span>
+                                                <span class="text-truncate"
+                                                    style="max-width: 150px; display: inline-block; overflow: hidden; white-space: nowrap;">
+                                                    <?php echo htmlspecialchars($product['product_name']); ?>
+                                                </span>
                                                 <span><?php echo $product['total_quantity']; ?> ชิ้น</span>
                                             </li>
                                         <?php endforeach; ?>
@@ -326,6 +329,7 @@ $conn->close(); // ปิดการเชื่อมต่อฐานข้�
                                 <canvas id="myPieChart" width="400" height="400"></canvas>
                             </div>
 
+                            <!-- สคริปต์ JavaScript ที่เกี่ยวข้อง -->
                             <script>
                                 // ข้อมูลสำหรับกราฟ
                                 var productNames = <?php echo json_encode($best_selling_products); ?>;
@@ -333,16 +337,16 @@ $conn->close(); // ปิดการเชื่อมต่อฐานข้�
 
                                 // คำนวณยอดรวมของสินค้าทั้งหมด
                                 var totalQuantity = productQuantities.reduce(function (acc, quantity) {
-                                    return acc + parseInt(quantity, 10);  // ตรวจสอบให้แน่ใจว่าเป็นจำนวนเต็ม
+                                    return acc + parseInt(quantity, 10);
                                 }, 0);
 
                                 var ctx = document.getElementById('myPieChart').getContext('2d');
                                 var myPieChart = new Chart(ctx, {
                                     type: 'pie',
                                     data: {
-                                        labels: productNames, // ชื่อสินค้าทั้งหมด
+                                        labels: productNames,
                                         datasets: [{
-                                            data: productQuantities, // จำนวนสินค้าที่ขายได้
+                                            data: productQuantities,
                                             backgroundColor: [
                                                 'rgba(255, 99, 132, 0.2)',
                                                 'rgba(54, 162, 235, 0.2)',
@@ -379,9 +383,9 @@ $conn->close(); // ปิดการเชื่อมต่อฐานข้�
                                             datalabels: {
                                                 formatter: function (value, context) {
                                                     let percentage = totalQuantity ? (value / totalQuantity * 100).toFixed(2) : 0;
-                                                    return percentage + '%'; // แสดงเปอร์เซ็นต์ในกราฟ
+                                                    return percentage + '%';
                                                 },
-                                                color: '#000', // สีของข้อความ
+                                                color: '#000',
                                                 font: {
                                                     weight: 'normal',
                                                     size: 14
@@ -389,7 +393,7 @@ $conn->close(); // ปิดการเชื่อมต่อฐานข้�
                                             }
                                         }
                                     },
-                                    plugins: [ChartDataLabels] // เปิดใช้ ChartDataLabels
+                                    plugins: [ChartDataLabels]
                                 });
 
                                 // ฟังก์ชันสลับแสดงรายการ
@@ -419,7 +423,10 @@ $conn->close(); // ปิดการเชื่อมต่อฐานข้�
                                 <ul class="list-group list-group-flush">
                                     <?php while ($product = $result_low_stock_products->fetch_assoc()): ?>
                                         <li class="list-group-item d-flex justify-content-between">
-                                            <span><?php echo $product['product_name']; ?></span>
+                                            <span class="text-truncate"
+                                                style="max-width: 150px; display: inline-block; overflow: hidden; white-space: nowrap;">
+                                                <?php echo htmlspecialchars($product['product_name']); ?>
+                                            </span>
                                             <span><?php echo $product['quantity']; ?> ชิ้น</span>
                                         </li>
                                     <?php endwhile; ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2024 at 12:46 PM
+-- Generation Time: Oct 17, 2024 at 10:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `category_id` int(11) NOT NULL,
-  `category_name` varchar(255) NOT NULL,
+  `category_name` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -58,7 +58,7 @@ INSERT INTO `categories` (`category_id`, `category_name`, `created_at`) VALUES
 
 CREATE TABLE `companies` (
   `company_id` int(11) NOT NULL,
-  `company_name` varchar(255) NOT NULL,
+  `company_name` varchar(100) NOT NULL,
   `company_address` varchar(255) DEFAULT NULL,
   `company_phone` varchar(10) DEFAULT NULL,
   `company_email` varchar(100) DEFAULT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`company_id`, `company_name`, `company_address`, `company_phone`, `company_email`, `profile_image`) VALUES
-(1, 'บริษัท เฮง เฮง จำกัด', '111/74 ม.3 ต.พิมลราช อ.บางบัวทอง จ.นนทบุรี 11110', '0955514657', 'third.nk20@gmail.com', 'ed095430-d7fe-11ed-b2bb-d336b48a2b9a_webp_original.jpg');
+(1, 'บริษัท เอ็ม เค อิเล็กทรอนิกส์ จำกัด', '111/74 ม.3 ต.พิมลราช อ.บางบัวทอง จ.นนทบุรี 11110', '0955514657', 'third.nk20@gmail.com', 'ed095430-d7fe-11ed-b2bb-d336b48a2b9a_webp_original.jpg');
 
 -- --------------------------------------------------------
 
@@ -80,11 +80,11 @@ INSERT INTO `companies` (`company_id`, `company_name`, `company_address`, `compa
 
 CREATE TABLE `customers` (
   `customer_id` int(11) NOT NULL,
-  `customer_name` varchar(255) NOT NULL,
+  `customer_name` varchar(100) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `district` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `province` varchar(255) DEFAULT NULL,
+  `district` varchar(100) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `province` varchar(100) DEFAULT NULL,
   `phonenumber` varchar(10) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -94,7 +94,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `customer_name`, `address`, `district`, `city`, `province`, `phonenumber`, `created_at`) VALUES
-(1, 'ร้าน จงเจริญ', '303/46 ม.5 ', 'ต.บ้านแดง', 'อ.เมือง', 'จ.เลย', '0953145788', '2024-07-30 13:13:14'),
+(1, 'ร้าน จงเจริญฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟ', '303/46 ม.5ฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟ', 'ต.บ้านแดง', 'อ.เมือง', 'จ.เลย', '0953145788', '2024-07-30 13:13:14'),
 (12, 'ร้านจรัญ', '77/123 ม.2', 'ต.ฝ้ายแดง', 'อ.เมือง', 'จ.ยะลา', '0874475632', '2024-08-05 11:24:51'),
 (19, 'ร้าน รวย รวย รวย จำกัด', 'กฟหกฟหก', 'เกดเเ', 'เมือง', '48', '0844615645', '2024-08-15 13:26:59'),
 (20, 'สาธิต', '131/7', 'บ้านดอน', 'เมือง', 'สุราษฎร์ธานี', '0985894984', '2024-08-29 15:31:48'),
@@ -117,7 +117,7 @@ INSERT INTO `customers` (`customer_id`, `customer_name`, `address`, `district`, 
 
 CREATE TABLE `employees` (
   `employee_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `district` varchar(100) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
@@ -133,7 +133,7 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`employee_id`, `name`, `address`, `district`, `city`, `province`, `phone`, `created_at`) VALUES
 (4, 'สมพร แซ่ม้า', '123/89', 'น้ำกุ่ม', 'นครไทย', 'พิษณุโลก', '0895656542', '2024-08-29 16:00:16'),
 (5, 'จิ่มแจ้ม ยิ้มงาม', '89/56', 'ปาดี', 'เมือง', 'นาราธิวาส', '0895655645', '2024-08-29 16:01:45'),
-(9, 'ณัฐันนทน์ กลางเคื่อม', '111/74 ม.3ต.พิมลราช', 'ปากน้ำ', 'อ.บางบัวทอง', 'นนทบุรี', '0955514657', '2024-09-23 08:48:00');
+(9, 'ณัฐันนทน์ กลางเคื่อม', '111/74 ม.3', 'ปากน้ำ', 'อ.บางบัวทอง', 'นนทบุรี', '0955514657', '2024-09-23 08:48:00');
 
 -- --------------------------------------------------------
 
@@ -243,7 +243,10 @@ INSERT INTO `orders` (`order_id`, `customer_id`, `total_price`, `order_date`, `c
 (78, 1, 1326.80, '2024-10-06 10:19:28', 1, 0.00, 7.00),
 (79, 1, 192.60, '2024-10-07 10:30:49', 1, 10.00, 7.00),
 (80, 1, 2140.00, '2024-10-07 10:35:40', 1, 0.00, 7.00),
-(81, 1, 963.00, '2024-10-07 10:43:44', 1, 10.00, 7.00);
+(81, 1, 963.00, '2024-10-07 10:43:44', 1, 10.00, 7.00),
+(82, 1, 2140.00, '2024-10-17 06:53:50', 1, 0.00, 7.00),
+(83, 1, 200.00, '2024-10-17 06:59:22', 1, 0.00, NULL),
+(84, 1, 90.00, '2024-10-17 07:00:18', 1, 10.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -467,7 +470,10 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`
 (199, 78, 3, 1, 100.00, 0, NULL),
 (200, 79, 28, 1, 200.00, 0, NULL),
 (201, 80, 28, 10, 2000.00, 0, NULL),
-(202, 81, 3, 10, 1000.00, 0, NULL);
+(202, 81, 3, 10, 1000.00, 0, NULL),
+(203, 82, 28, 10, 2000.00, 0, NULL),
+(204, 83, 28, 1, 200.00, 0, NULL),
+(205, 84, 1, 1, 100.00, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -477,7 +483,7 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`
 
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
+  `product_name` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -491,7 +497,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `description`, `price`, `quantity`, `category_id`, `created_at`, `image`) VALUES
-(1, 'สายไฟ 5 เมตร', 'สายไฟคุณภาพสูง', 100.00, 21, 1, '2024-07-30 12:33:10', '515996.jpg'),
+(1, 'สายไฟ 5 เมตรกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกก', 'สายไฟคุณภาพสูง', 100.00, 20, 1, '2024-07-30 12:33:10', '515996.jpg'),
 (2, 'รีโมทแอร์รุ่นv.1', 'ใช้สำหรับเครื่องปรับอากาศรุ่น momo fotu', 120.00, 81, 2, '2024-07-30 12:47:29', '641849.jpg'),
 (3, 'รีโมทแอร์รุ่นv.2', 'ใช้กับเครื่องปรับอากาสทุกยี่ห้อ', 100.00, 79, 2, '2024-07-30 12:52:25', '641850.jpg'),
 (4, 'หม้อหุงข้าว 120w', 'หม้อหุงข้าว\r\n', 430.00, 90, 3, '2024-08-01 14:13:26', '567315.jpg'),
@@ -501,7 +507,7 @@ INSERT INTO `products` (`product_id`, `product_name`, `description`, `price`, `q
 (8, 'รีโมทv.3', '-', 70.00, 30, 2, '2024-08-08 13:38:52', 'รีโมท LED รวมรุ่น.jpg'),
 (16, 'หม้อข้าวขนาดเล็ก', '-', 310.00, 119, 3, '2024-08-09 16:45:21', '567314.jpg'),
 (17, 'สายแลน 15 เมตร', '-', 450.00, 47, 5, '2024-08-12 14:56:51', '515997.jpg'),
-(19, 'AX-4BT', 'เครื่องปรับแต่งเสียงง\r\n\r\n\r\n\r\n\r\n', 3500.00, 20, 7, '2024-08-29 15:38:28', '179906.jpg'),
+(19, 'AX-4BT', 'เครื่องปรับแต่งเสียงง', 3500.00, 20, 7, '2024-08-29 15:38:28', '179906.jpg'),
 (20, 'ลำโพงไฟเบอร์12\"', 'ลำโพงขยายเสียง', 2900.00, 20, 8, '2024-08-29 15:46:36', 'LINE_ALBUM_ตู้ลำโพงบ้าน_๒๔๐๒๑๑_1.jpg'),
 (21, 'ไมค์ลอยถือคู่', 'ใช้ในการขยายเสียง', 350.00, 51, 10, '2024-08-29 15:50:51', 'LINE_ALBUM_ไมค์ลอย แบบถือ_๒๔๐๒๑๑_17.jpg'),
 (22, 'ลำโพงคางหมู10\"', 'ลำโพง', 2100.00, 21, 8, '2024-09-11 11:59:14', '32.jpg'),
@@ -509,7 +515,7 @@ INSERT INTO `products` (`product_id`, `product_name`, `description`, `price`, `q
 (25, 'ตู็แล็ค', '-', 1500.00, 15, 8, '2024-09-21 13:11:45', 'LINE_ALBUM_ขาตั้งลำโพง+ขาแขวนTV+ตู้ Rack_240802_3.jpg'),
 (26, 'ตู้ลำโพงอเนกประสงค์', '--', 200.00, 5, 8, '2024-09-21 13:14:07', '19.jpg'),
 (27, 'เสาอากาศ', '-', 170.00, 5, 14, '2024-09-21 13:22:46', '656415.jpg'),
-(28, 'เครื่องช่างดิจิตอล', '-', 200.00, 77, 15, '2024-09-21 13:26:23', '4D5D7E37-B1AE-4EA5-9F51-0BAD0FDA238E.jpg'),
+(28, 'เครื่องช่างดิจิตอล', '-', 200.00, 66, 15, '2024-09-21 13:26:23', '4D5D7E37-B1AE-4EA5-9F51-0BAD0FDA238E.jpg'),
 (29, 'วิทยุ', '-', 350.00, 11, 14, '2024-09-21 13:41:11', '590951.jpg'),
 (30, 'หลอดไฟ', '-', 90.50, 11, 14, '2024-09-21 13:41:59', 'S__967025.jpg'),
 (31, 'หฟกฟหก', 'กหฟฟหกก', 150.00, 33, 3, '2024-09-23 05:53:21', '590954.jpg'),
@@ -745,8 +751,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `employee_id`) VALUES
-(1, 'Admin', '$2y$10$p4BnCAVkLJG9tDUuE8z1b.bS73hcsTA3Tq5mbiRJRQyBkJk3uvB52', 'admin', NULL),
-(6, 'User', '$2y$10$3gGLt19F8Z0G9nRUvbPwsuC/E1Vrzsp7wdCYEOJJ26ztbpY8zC0Ny', 'user', 9);
+(1, 'Admin', '$2y$10$4C9IgjEHS2HWusJuJANAYuFGnsgEOA2jf2pTnN5XeKz9ae4vu3Fs2', 'admin', NULL),
+(6, 'User', '$2y$10$ozPpIMeO92d/rT.zJFpOn.nz741AfTpqnHU/w4puGjmRJp6u6BS/S', 'user', 9);
 
 --
 -- Indexes for dumped tables
@@ -871,13 +877,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
 
 --
 -- AUTO_INCREMENT for table `products`

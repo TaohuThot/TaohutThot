@@ -102,7 +102,7 @@ $conn->close();
                             echo "<tr>
                                     <td class = 'text-center'>{$row_number}</td>
                                     <td class = 'text-center'>{$row['order_id']}</td>
-                                    <td>{$row['product_name']}</td>
+                                    <td class='text-truncate' style='max-width: 150px; overflow: hidden; white-space: nowrap;' >{$row['product_name']}</td>
                                     <td class = 'text-center'>{$row['quantity']}</td>
                                     <td>{$status}</td>
                                     <td>

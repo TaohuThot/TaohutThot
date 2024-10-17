@@ -89,7 +89,7 @@ $conn->close();
                                 <?php foreach ($order_items as $item): ?>
                                     <tr>
                                         <td><?php echo $index++; ?></td>
-                                        <td><?php echo htmlspecialchars($item["product_name"]); ?></td>
+                                        <td class='text-truncate' style='max-width: 150px; overflow: hidden; white-space: nowrap;' ><?php echo htmlspecialchars($item["product_name"]); ?></td>
                                         <td><?php echo htmlspecialchars($item["quantity"]); ?></td>
                                         <td><?php echo htmlspecialchars(number_format($item["cost_per_unit"], 2)); ?></td>
                                     </tr>

@@ -11,26 +11,8 @@ $redirect_script = "";
 
 // ตรวจสอบว่ามีการส่งข้อมูลผ่านฟอร์มหรือไม่
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $new_username = isset($_POST['new_username']) ? $_POST['new_username'] : '';
     $new_password = isset($_POST['new_password']) ? $_POST['new_password'] : '';
     $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
-
-    // อัปเดตเฉพาะ username ถ้ามีการกรอกข้อมูล
-    if (!empty($new_username)) {
-        $sql_user = "UPDATE users SET username = ? WHERE role = 'admin'";
-        $stmt_user = $conn->prepare($sql_user);
-        $stmt_user->bind_param("s", $new_username);
-        if ($stmt_user->execute()) {
-            $alert_message = "<div class='alert alert-success'>ชื่อผู้ใช้งานถูกอัปเดตแล้ว</div>";
-            $redirect_script = "<script>
-                                    setTimeout(function() {
-                                        window.location.href = 'edit_password.php';
-                                    }, 1500);
-                                </script>";
-        } else {
-            $alert_message = "<div class='alert alert-danger'>เกิดข้อผิดพลาดในการอัปเดตชื่อผู้ใช้งาน</div>";
-        }
-    }
 
     // ตรวจสอบว่าทั้งสองฟิลด์ถูกกรอก
     if (!empty($new_password) && !empty($confirm_password)) {
@@ -83,19 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-chevron p-3 rounded -3">
                 <li class="breadcrumb-item"><a class="link-body-emphasis fw-semibold text-decoration-none" href="home.php">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">เปลี่ยนชื่อผู้ใช้ / รหัสผ่าน</li>
+                <li class="breadcrumb-item active" aria-current="page">เปลี่ยนรหัสผ่าน</li>
             </ol>
         </nav>
         <?php echo $alert_message; ?>
         <?php echo $redirect_script; ?>
         <div class="d-flex justify-content-between align-items-center">
-            <h2>เปลี่ยนชื่อผู้ใช้ / รหัสผ่าน</h2>
+            <h2>เปลี่ยนรหัสผ่าน</h2>
         </div>
         <form method="post" action="edit_password.php">
-            <div class="mb-3">
-                <label class="small mb-1" for="new_username">ชื่อผู้ใช้</label>
-                <input class="form-control" id="new_username" type="text" name="new_username" placeholder="ชื่อผู้ใช้">
-            </div>
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                     <label class="small mb-1" for="new_password">รหัสผ่าน</label>

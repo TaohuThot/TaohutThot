@@ -117,7 +117,7 @@ $conn->close();
                             echo "<tr>
                                         <td class = 'text-center'>{$row_number}</td>
                                         <td class = 'text-center'>{$row['order_id']}</td>
-                                        <td>{$row['customer_name']}</td>
+                                        <td class='text-truncate' style='max-width: 150px; overflow: hidden; white-space: nowrap;' >{$row['customer_name']}</td>
                                         <td>฿ " . number_format(htmlspecialchars($row['total_price']), 2) . "</td>
                                         <td>{$formatted_date}</td>
                                         <td class = 'text-center'>

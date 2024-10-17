@@ -106,9 +106,9 @@ $conn->close();
                             echo "<tr>
                                     <td class = 'text-center'>{$row_number}</td>
                                     <td class = 'text-center'>{$row['customer_id']}</td>
-                                    <td>{$row['customer_name']}</td>
-                                    <td>{$row['address']}</td>
-                                    <td>{$row['district']}</td>
+                                    <td class='text-truncate' style='max-width: 150px; overflow: hidden; white-space: nowrap;' >{$row['customer_name']}</td>
+                                    <td class='text-truncate' style='max-width: 150px; overflow: hidden; white-space: nowrap;' >{$row['address']}</td>
+                                    <td >{$row['district']}</td>
                                     <td>{$row['city']}</td>
                                     <td>{$row['province']}</td>
                                     <td>{$row['phonenumber']}</td>";

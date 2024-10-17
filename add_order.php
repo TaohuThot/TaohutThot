@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $customer_id = $_POST['customer_id'];
     $company_id = $_POST['company_id'];
     $discount = isset($_POST['discount']) ? floatval($_POST['discount']) : 0; // ตรวจสอบและกำหนดส่วนลด
-    $tax_rate = 7; // อัตราภาษี 7%
+    // $tax_rate = 7; // อัตราภาษี 7%
     $total_before_discount = 0;
-    $total_tax = 0;
+    // $total_tax = 0;
     $grand_total = 0;
 
     // ตรวจสอบสต็อกสินค้า
@@ -84,8 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // คำนวณส่วนลดและภาษี
         $total_discount_amount = ($total_before_discount * $discount) / 100;
         $total_after_discount = $total_before_discount - $total_discount_amount;
-        $total_tax = ($total_after_discount * $tax_rate) / 100;
-        $grand_total = $total_after_discount + $total_tax;
+        // $total_tax = ($total_after_discount * $tax_rate) / 100;
+        $grand_total = $total_after_discount;
 
         // อัปเดตยอดรวมทั้งหมดในตาราง orders
         $sql_update_order = "UPDATE orders SET total_price = ? WHERE order_id = ?";
@@ -144,7 +144,7 @@ while ($row = $product_result->fetch_assoc()) {
             let customers = <?= json_encode($customers) ?>;
             let products = <?= json_encode($products) ?>;
 
-            const TAX_RATE = 7;  // อัตราภาษี 7%
+            // const TAX_RATE = 7;  
 
             //ฟังชั่นการอัปเดตที่อยู่บริษัท
             function updateCompanyAddress() {
@@ -385,7 +385,7 @@ while ($row = $product_result->fetch_assoc()) {
                             <input type="number" class="form-control" id="discount" name="discount"  placeholder="กรอกส่วนลด %" disabled>
                         </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td colspan="4" class="text-end">
                             <input type="checkbox" id="toggleTax" checked>
                             <label for="toggleTax" class="me-2"> ภาษี:</label>
@@ -393,7 +393,7 @@ while ($row = $product_result->fetch_assoc()) {
                         <td colspan="2">
                             <span id="totalTax">0.00</span>
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td colspan="4" class="text-end"><strong>ยอดรวมทั้งหมด:</strong></td>
                         <td colspan="2"><strong><span id="grandTotal">0.00</span></strong></td>

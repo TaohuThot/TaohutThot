@@ -100,9 +100,15 @@ $conn->close();
                         <div class="col-8">
                             <h5>ข้อมูลบริษัท</h5>
                             ชื่อบริษัท:
-                            <?php echo isset($company['company_name']) ? $company['company_name'] : 'ไม่พบข้อมูล'; ?><br>
+                            <span class="text-truncate"
+                                style="max-width: 400px; display: inline-block; overflow: hidden; white-space: nowrap;">
+                                <?php echo isset($company['company_name']) ? htmlspecialchars($company['company_name']) : 'ไม่พบข้อมูล'; ?>
+                            </span><br>
                             ที่อยู่:
-                            <?php echo isset($company['company_address']) ? $company['company_address'] : 'ไม่พบข้อมูล'; ?><br>
+                            <span class="text-truncate"
+                                style="max-width: 400px; display: inline-block; overflow: hidden; white-space: nowrap;">
+                                <?php echo isset($company['company_address']) ? htmlspecialchars($company['company_address']) : 'ไม่พบข้อมูล'; ?>
+                            </span><br>
                             เบอร์โทร:
                             <?php echo isset($company['company_phone']) ? $company['company_phone'] : 'ไม่พบข้อมูล'; ?>
                         </div>
@@ -122,16 +128,22 @@ $conn->close();
                 <div class="col-12 border border-dark rounded-4 p-3">
                     <h5>ข้อมูลลูกค้า</h5>
                     ชื่อ:
-                    <?php echo isset($customer['customer_name']) ? htmlspecialchars($customer['customer_name']) : 'ไม่พบข้อมูล'; ?><br>
+                    <span class="text-truncate"
+                        style="max-width: 400px; display: inline-block; overflow: hidden; white-space: nowrap;">
+                        <?php echo isset($customer['customer_name']) ? htmlspecialchars($customer['customer_name']) : 'ไม่พบข้อมูล'; ?>
+                    </span><br>
 
                     ที่อยู่:
-                    <?php
-                    $address = isset($customer['address']) ? htmlspecialchars($customer['address']) : 'ไม่พบข้อมูล';
-                    $district = isset($customer['district']) ? htmlspecialchars($customer['district']) : 'ไม่พบข้อมูล';
-                    $city = isset($customer['city']) ? htmlspecialchars($customer['city']) : 'ไม่พบข้อมูล';
-                    $province = isset($customer['province']) ? htmlspecialchars($customer['province']) : 'ไม่พบข้อมูล';
-                    echo $address . ' ' . $district . ' ' . $city . ' ' . $province;
-                    ?><br>
+                    <span class="text-truncate "
+                        style="max-width: 400px; display: inline-block; overflow: hidden; white-space: nowrap;">
+                        <?php
+                        $address = isset($customer['address']) ? htmlspecialchars($customer['address']) : 'ไม่พบข้อมูล';
+                        $district = isset($customer['district']) ? htmlspecialchars($customer['district']) : 'ไม่พบข้อมูล';
+                        $city = isset($customer['city']) ? htmlspecialchars($customer['city']) : 'ไม่พบข้อมูล';
+                        $province = isset($customer['province']) ? htmlspecialchars($customer['province']) : 'ไม่พบข้อมูล';
+                        echo $address . ' ' . $district . ' ' . $city . ' ' . $province;
+                        ?>
+                    </span><br>
 
                     เบอร์โทร:
                     <?php echo isset($customer['phonenumber']) ? htmlspecialchars($customer['phonenumber']) : 'ไม่พบข้อมูล'; ?>
@@ -156,7 +168,10 @@ $conn->close();
                                 <?php foreach ($order_items as $item): ?>
                                     <tr>
                                         <td class='text-center'><?php echo $index++; ?></td>
-                                        <td><?php echo htmlspecialchars($item["product_name"]); ?></td>
+                                        <td class='text-truncate'
+                                            style='max-width: 150px; overflow: hidden; white-space: nowrap;'>
+                                            <?php echo htmlspecialchars($item["product_name"]); ?>
+                                        </td>
                                         <td class='text-center'><?php echo number_format($item["quantity"]); ?></td>
                                         <td class='text-end'>
                                             <?php echo number_format($item["total_price"] / $item["quantity"], 2); ?>
@@ -173,20 +188,20 @@ $conn->close();
                             <?php
                             $subtotal = !empty($order_items) ? array_sum(array_column($order_items, 'total_price')) : 0;
                             $discount = isset($order['discount']) ? $order['discount'] : 0;
-                            $tax_rate = isset($order['tax_rate']) ? $order['tax_rate'] : 7;
+                            // $tax_rate = isset($order['tax_rate']) ? $order['tax_rate'] : 7;
                             $discount_amount = ($subtotal * $discount) / 100;
                             $total_after_discount = $subtotal - $discount_amount;
-                            $tax_amount = ($total_after_discount * $tax_rate) / 100;
-                            $grand_total = $total_after_discount + $tax_amount;
+                            // $tax_amount = ($total_after_discount * $tax_rate) / 100;
+                            $grand_total = $total_after_discount;
                             ?>
                             <tr>
                                 <td colspan="4" class="text-end">ส่วนลด :</td>
                                 <td class='text-end'><?php echo number_format($discount_amount, 2); ?></td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td colspan="4" class="text-end">ภาษี (<?php echo $tax_rate; ?>%) :</td>
                                 <td class='text-end'><?php echo number_format($tax_amount, 2); ?></td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <td colspan="4" class="text-end "><strong>ยอดรวมสุทธิ : </strong></td>
                                 <td class='text-end'><strong><?php echo number_format($grand_total, 2); ?></strong></td>

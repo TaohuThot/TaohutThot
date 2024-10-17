@@ -143,7 +143,7 @@ $total_pages = ceil($total_records / $records_per_page);
                             echo "<td>
                                         <div class='product-info'>
                                             <img src='uploads/" . htmlspecialchars($row['image']) . "' alt='Product Image' class='img-thumbnail'>
-                                            <p>" . htmlspecialchars($row['product_name']) . "</p>
+                                            <p class='text-truncate' style='max-width: 150px; overflow: hidden; white-space: nowrap;'>" . htmlspecialchars($row['product_name']) . "</p>
                                         </div>
                                     </td>";
                             echo "<td>" . htmlspecialchars($row['category_name']) . "</td>";

@@ -86,16 +86,16 @@ $total_pages = ceil($total_records / $records_per_page); // คำนวณจ�
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
                             echo "<td class='text-center'>" . htmlspecialchars($row['category_id']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['category_name']) . "</td>";
+                            echo "<td class='text-truncate' style='max-width: 150px; overflow: hidden; white-space: nowrap;'>" . htmlspecialchars($row['category_name']) . "</td>";
                             echo "<td class='text-center'>" . htmlspecialchars($row['product_count']) . "</td>";
                             if ($_SESSION['role'] === 'admin') {
                                 echo "<td class='text-center'>";
                                 echo "<a href='edit_category.php?category_id=" . $row['category_id'] . "' class='custom-link'>
-                                    <i class='bi bi-pencil'></i> แก้ไขรายละเอียด
-                                </a> &nbsp;";
+                                <i class='bi bi-pencil'></i> แก้ไขรายละเอียด
+                            </a> &nbsp;";
                                 echo "<a href='#' class='custom-link' onclick='confirmDelete(" . $row['category_id'] . ")'>
-                                    <i class='bi bi-trash'></i> ลบ
-                                </a>";
+                                <i class='bi bi-trash'></i> ลบ
+                            </a>";
                                 echo "</td>";
                             }
                             echo "</tr>";
